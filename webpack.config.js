@@ -1,45 +1,44 @@
-var path = require('path');
 var webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: [
-        'babel-polyfill',
-        './src/theme/main.less',
-        './src/main',
-        'webpack-dev-server/client?http://127.0.0.0:8080'
-        // 'webpack-dev-server/client?http://localhost:8080'
-    ],
+    mode: 'development',
+    entry: path.join(__dirname, "src", "main.js"),
     output: {
-        publicPath: '/',
-        filename: 'main.js'
+        path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx'],
+        extensions: ['*', '.js'],
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, "src", "index.html"),
+        }),
         new webpack.LoaderOptionsPlugin({
             debug: true
         })
     ],
     devtool: 'source-map',
     module: {
-        loaders: [
+        rules: [
             {
-                test:  /\.(js|jsx)$/,
-                include: path.join(__dirname, 'src'),
-                loader: 'babel-loader',
+                test: /\.(js)$/,
                 exclude: /node_modules/,
-                query: {
-                    presets: ['es2015', 'react']
-                }
+                use: ['babel-loader']
+            },
+            {
+                test: /\.(png|jp(e*)g|svg|gif)$/,
+                use: ['file-loader'],
+            },
+            {
+                test: /\.(scss)$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.less$/,
-                loader: "style-loader!css-loader!autoprefixer-loader!less-loader"
+                use: ['style-loader','css-loader','autoprefixer-loader','less-loader']
             }
         ]
     },
-    devServer: {
-        contentBase: "./src"
-    }
 };

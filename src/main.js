@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import './theme/main.scss'
 
 var TRANSACTIONS = [
 	{
@@ -239,7 +240,7 @@ class Application extends React.Component {
                         );
                     }.bind(this))}
                 </div>
-                <AddTransactionForm onAdd={this.onItemAdd}/>
+				<AddTransactionForm onAdd={this.onItemAdd} />
 			</div>
 		);
 	}
@@ -257,4 +258,4 @@ Application.propTypes = {
 	})).isRequired,
 };
 
-ReactDOM.render(<Application initialItems={TRANSACTIONS} title="My Checkbook"/>, document.getElementById('container'));
+ReactDOM.render(<Application initialItems={TRANSACTIONS} title="My Checkbook"/>, document.getElementById('root'));
