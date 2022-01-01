@@ -1,70 +1,51 @@
 import React from 'react';
-// import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-var createReactClass = require('create-react-class');
-// import Application from './components/checkbook.js';
-
-// const application = new Application();
-
-
-// import React from 'react';
-// import deleteImg from './img/x.png';
-//
 
 var TRANSACTIONS = [
 	{
-		name: "pizza",
-		amount: 22,
+		name: "paycheck",
+		amount: 728.81,
 		id: 1,
+		date: "11/16/2017",
+	},
+	{
+		name: "pizza",
+		amount: -22.11,
+		id: 2,
 		date: "11/20/2017",
 	},
 	{
 		name: "gas monies",
-		amount: 15,
-		id: 2,
+		amount: -15,
+		id: 3,
 		date: "11/28/2017",
 	},
 	{
 		name: "kumquats",
-		amount: 6,
-		id: 3,
+		amount: -6.82,
+		id: 4,
 		date: "12/1/2017",
 	},
 	{
 		name: "tips",
-		amount: -86,
-		id: 4,
+		amount: 86.28,
+		id: 5,
 		date: "12/1/2017",
 	},
 ];
 
-var nextId = 5;
+var nextId = 6;
 
-//var AddTransactionForm = React.createClass({
 class AddTransactionForm extends React.Component {
-	// propTypes: {
-	// 	onAdd: PropTypes.func.isRequired,
-	// },
 
-	// getInitialState: function() {
-	// 	return {
-	// 		def_name: "Description",
-	// 		name: "Description",
-	// 		def_amount: "Amount",
-	// 		amount: "Amount",
-	// 		date: "",
-	// 	};
-	// },
-
-    //ES6 'getInitialState'
     constructor(props) {
         super(props);
         this.state = {
-            def_name: "Description",
-            name: "Description",
-            def_amount: "Amount",
-            amount: "Amount",
+			displayName: "Description",
+            name: "",
+			displayAmount: "Amount",
+			amount: 0,
             date: "",
         }
         this.onSubmit = this.onSubmit.bind(this);
@@ -79,65 +60,68 @@ class AddTransactionForm extends React.Component {
 	onSubmit(e) {
 		e.preventDefault();
 		this.props.onAdd(this.state.name,this.state.amount);
-		this.setState({def_name: "Description"});
-		this.setState({name: "Description"});
-		this.setState({def_amount: "Amount"});
-		this.setState({amount: "Amount"});
-		this.setState({date: ""});
+		this.setState({ displayName: "Description" });
+		this.setState({ name: "Description" });
+		this.setState({ displayAmount: "Amount" });
+		this.setState({ amount: "Amount" });
+		this.setState({ date: "" });
 	}
 
 	onNameChange(e) {
-		console.log(e.target.value);
-		this.setState({name: e.target.value});
-		/*this.setState({_name: name});*/
+		this.setState({displayName: e.target.value});
 	}
 
 	onNameFocus(e) {
-		console.log(e.target.value);
-		if(e.target.value=="Description")
+		if(String(e.target.value).toLowerCase() == "description")
 		{
-			this.setState({name: ""});
+			this.setState({displayName: ""});
 		}
 	}
 
 	onNameBlur(e) {
-		console.log(e.target.value);
 		if(e.target.value=="")
 		{
-			this.setState({name: "Description"});
+			this.setState({ displayName: "Description" });
+			this.setState({ name: "Description"});
 		}
-		/*this.setState({name: e.target.value});*/
+		else
+		{
+			this.setState({ name: e.target.value });
+		}
 	}
 
     onAmountChange(e) {
-		console.log(e.target.value);
-		this.setState({amount: e.target.value});
-		/*this.setState({amount: amount}); */
+		this.setState({displayAmount: e.target.value});
 	}
 
     onAmountFocus(e) {
-		console.log(e.target.value);
-		if(e.target.value=="Amount")
+		if(String(e.target.value).toLowerCase() == "amount")
 		{
-			this.setState({amount: ""});
+			this.setState({displayAmount: ""});
 		}
 	}
 
 	onAmountBlur(e) {
-		console.log(e.target.value);
-		if(e.target.value=="")
-		{
-			this.setState({amount: "Amount"});
+
+		let val = +parseFloat(e.target.value).toFixed(2)
+
+		if (isNaN(val)) {
+			this.setState({ displayAmount: "Amount" });
+			this.setState({ amount: 0 });
 		}
-		/*this.setState({name: e.target.value});*/
+		else
+		{
+			this.setState({ displayAmount: val });
+			this.setState({ amount: val });
+		}
 	}
 
 	render() {
 		return (
 			<div className="add-transaction-form">
 				<form onSubmit={this.onSubmit}>
-					<input type="text" id="input-name" value={this.state.name} onChange={this.onNameChange} onFocus={this.onNameFocus} onBlur={this.onNameBlur} />
-					<input id="input-amount" type="text" value={this.state.amount} onChange={this.onAmountChange} onFocus={this.onAmountFocus} onBlur={this.onAmountBlur} />
+					<input type="text" id="input-name" value={this.state.displayName} onChange={this.onNameChange} onFocus={this.onNameFocus} onBlur={this.onNameBlur} />
+					<input id="input-amount" type="text" value={this.state.displayAmount} onChange={this.onAmountChange} onFocus={this.onAmountFocus} onBlur={this.onAmountBlur} />
 					<input type="submit" value="Add" />
 				</form>
 			</div>
@@ -158,7 +142,7 @@ function Transactions (props) {
 			<tbody>
 				<tr>
 					<td>Balance:</td>
-					<td>{totalBalance}</td>
+					<td>${parseFloat(totalBalance).toFixed(2)}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -209,10 +193,8 @@ Item.propTypes = {
 	onRemove: PropTypes.func.isRequired,
 };
 
-//var Application = React.createClass ({
 class Application extends React.Component {
 
-    //ES6 'getInitialState'
     constructor(props) {
         super(props);
         this.state = {
@@ -226,7 +208,7 @@ class Application extends React.Component {
 		var d = new Date();
 		this.state.items.push({
 			name: name,
-			amount: parseInt(amount,10),
+			amount: amount,
 			id: nextId,
 			date: d.toLocaleDateString("en-US"),
 		});

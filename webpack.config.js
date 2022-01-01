@@ -6,7 +6,8 @@ module.exports = {
         'babel-polyfill',
         './src/theme/main.less',
         './src/main',
-        'webpack-dev-server/client?http://localhost:8080'
+        'webpack-dev-server/client?http://127.0.0.0:8080'
+        // 'webpack-dev-server/client?http://localhost:8080'
     ],
     output: {
         publicPath: '/',
