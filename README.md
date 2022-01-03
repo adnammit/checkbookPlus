@@ -17,4 +17,3 @@ CheckbookPlus is an improvement over the original Checkbook in that it introduce
 * Add a persistent back end
 * Clean up webpack config and deploy on a hosted web server
 * Add images (like 'X' for transaction removal)
-* re-write css

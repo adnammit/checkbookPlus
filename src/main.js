@@ -139,7 +139,7 @@ function Transactions (props) {
 	}, 0)
 
 	return (
-		<table className="transactions">
+		<table className="balance">
 			<tbody>
 				<tr>
 					<td>Balance:</td>
@@ -177,11 +177,15 @@ function Item (props) {
 			<div className="item-name">
 				{props.name}
 			</div>
-			<div className="item-remove">
-				<a onClick={props.onRemove}>x</a>
-			</div>
 			<div className="item-amount">
-				{props.amount}
+				<div className="amount">
+					{props.amount}
+				</div>
+				<a onClick={props.onRemove}>
+					<div className="remove">
+						<span>X</span>
+					</div>
+				</a>
 			</div>
 		</div>
 	);

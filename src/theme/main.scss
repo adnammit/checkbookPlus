@@ -1,201 +1,232 @@
+$alabaster: #fafafa;
+$mercury: #e8e8e8;
+$silver: #ccc;
+$dusty-gray: #999;
+$gray: #888;
+$dove-gray: #666;
+$tundora: #444;
+$mineshaft: #333;
+$cod-mine: #222;
+$cod-gray: #111;
+
+$san-marino: #4b71b5;
+$tall-poppy: #B32D29;
+
+@mixin dark-on-light {
+    color: $mineshaft;
+    background: $silver;
+}
+
+@mixin light-on-dark {
+    color: $mercury;
+    background: $mineshaft;
+}
+
+@mixin shy-text {
+    color: $dusty-gray;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+@mixin input-text {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: $tundora;
+    border-style: none;
+    text-shadow: none;
+    outline: none;
+}
+
+@mixin button-submit {
+    @include shy-text;
+
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    text-shadow: none;
+    text-transform: uppercase;
+    background-color: $tundora;
+
+    &:hover {
+        cursor: pointer;
+        background: $san-marino;
+        color: $alabaster;
+    }
+}
+
 html, body {
-    height: 100%;
-    min-height: 100%;
+    @include dark-on-light;
+
     margin: 0;
-    background: #ccc;
     font-family: arial;
-    color: #333;
     text-transform: uppercase;
 
     a {
-        font-size: 0.6em;
+        font-size: 0.6rem;
         font-weight: bold;
-        letter-spacing: 1px;
-        color: #444;
+        letter-spacing: 0.1rem;
+        color: $tundora;
         text-decoration: none;
     }
 
     a:hover {
-        color: #ccc;
+        color: $silver;
     }
 
     a:visited {
-        color: #444;
+        color: $tundora;
     }
 
     a.selected, a:hover {
-        color: #888;
+        color: $gray;
     }
 
     .git-link {
-        align: center;
-        padding: 4px;
+        padding: 0.5em;
     }
 
+    .checkbook {
+        @include light-on-dark;
 
-.checkbook {
-    background: #333;
-    color: #e8e8e8;
-    width: 500px;
-    margin: 70px auto auto auto;
-    box-shadow: 0 4px 0px #333;
-    border-radius: 5px;
-
-    .header {
-        padding: 5px 10px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        background-color: #222;
-        border-radius: 5px 5px 0 0;
-        border-bottom: solid 2px #444;
-    }
-
-    .header h1 {
-        flex-grow: 1;
-        font-size: 1.5em;
-        letter-spacing: 3px;
-        font-weight: normal;
-        font-family: georgia;
-    }
-
-    .transactions {
-        margin-top: 0;
-
-    }
-
-    .transactions td {
-        font-size: .7em;
-        text-align: right;
-        letter-spacing: 2px;
-    }
-
-    .transactions td:first-child {
-        font-weight: normal;
-        color: #666;
-    }
-
-    .transactions td:last-child {
-        padding: 0px 20px;
-        font-size: 1.2em;
-        font-family: courier;
-        font-weight: bold;
-    }
-
-    .item {
-        display: flex;
-        font-size: 0.9em;
-        border-bottom: solid 2px #444;
-        letter-spacing: 2px;
-        width: 100%;
-    }
-
-    .item-remove {
-        visibility: hidden;
-        padding: 10px;
-        color: #853333;
-        background: #ccc;
-        font-weight:bold;
-        cursor: pointer;
-        width: 20px;
-    }
-
-    .item:hover .item-remove {
-        visibility: visible;
-    }
-
-    .item-date {
-        padding: 10px;
-        width: 100px;
-    }
-
-    .item-name {
-        flex-grow: 1;
-        padding: 10px;
-        text-align: left;
-        width: auto;
-    }
-
-    .item-amount {
-        width: 100px;
-        color: #666;
-        background: #ccc;
-        padding: 10px;
-        font-family: courier;
-        font-weight: bold;
-    }
-
-    .add-transaction-form form {
-        display: flex;
-        background-color: #222;
-        border-radius: 0 0 20px 20px
-    }
-
-    .add-transaction-form input[type=text] {
-
-        border-width: 0 0 1px 0;
-        margin: 15px 10px 15px 15px;
-        padding: 10px;
+        min-width: 500px;
+        max-width: 60rem;
+        margin: 2% auto auto auto;
+        box-shadow: 0 4px 0px $tundora;
         border-radius: 5px;
-        background-color: #333;
-        border-style: none;
-        text-shadow: none;
-        text-transform: uppercase;
-        color: #999;
-        letter-spacing: 2px;
-        outline: none;
-    }
 
-    .add-transaction-form #input-name {
-        flex-grow: 1;
-    }
+        .header {
+            padding: 5px 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            background-color: $cod-mine;
+            border-radius: 5px 5px 0 0;
+            border-bottom: solid 2px $tundora;
+        }
 
-    .add-transaction-form #input-amount {
-        width: 70px;
-    }
+        .header h1 {
+            flex-grow: 1;
+            font-size: 2.5rem;
+            letter-spacing: 0.5rem;
+            font-weight: normal;
+            font-family: georgia;
+        }
 
-    .add-transaction-form input[type=text]::-webkit-input-placeholder{
-        color: #666;
-        letter-spacing: 2px;
-    }
+        .balance {
+            margin-top: 0;
+        }
 
-    .add-transaction-form input[type=text]:focus{
-        background-color: #444;
-    }
+        .balance td {
+            font-size: .7em;
+            text-align: right;
+            letter-spacing: 2px;
+        }
 
-    .add-transaction-form input[type=submit] {
-        display: block;
-        font-size: .6em;
-        margin: 15px 15px 15px 0;
-        padding: 10px;
-        background-color: #333;
-        border-radius: 5px;
-        border: none;
-        color: #999;
-        letter-spacing: 2px;
-        font-weight: bold;
-        text-shadow: none;
-        text-transform: uppercase;
-    }
+        .balance td:first-child {
+            font-weight: normal;
+            color: #666;
+        }
 
-    .add-transaction-form input[type=submit]:hover{
-        background: #4b71b5;
-        color: #fafafa;
-        cursor: pointer;
+        .balance td:last-child {
+            padding: 0px 20px;
+            font-size: 1.2em;
+            font-family: courier;
+            font-weight: bold;
+        }
+
+        .item {
+            display: flex;
+            font-size: 0.9em;
+            letter-spacing: 2px;
+            border-bottom: solid 2px $tundora;
+        }
+
+        .item-date {
+            padding: 10px;
+            width: 100px;
+        }
+
+        .item-name {
+            flex-grow: 1;
+            padding: 10px;
+            text-align: left;
+            width: auto;
+        }
+
+        .item-amount {
+            @include dark-on-light();
+
+            display: flex;
+            justify-content: space-between;
+            width: 10em;
+            padding: 0;
+
+
+            .amount {
+                padding: 10px;
+                font-family: courier;
+                font-weight: bold;
+            }
+
+            a .remove {
+                cursor: pointer;
+            }
+
+            .remove {
+                visibility: hidden;
+
+                width: 2em;
+                height: 100%;
+                text-align: right;
+                display: flex;
+                justify-content: right;
+                align-items: center;
+
+                color: $tall-poppy;
+                font-weight: 800;
+                font-size: 1.5em;
+
+                span {
+                    padding-right: 3px;
+                }
+            }
+
+            &:hover .remove{
+                visibility: visible;
+            }
+        }
+
+        .add-transaction-form form {
+            display: flex;
+            background-color: $cod-mine;
+            border-radius: 0 0 5px 5px
+        }
+
+        .add-transaction-form #input-name {
+            flex-grow: 1;
+        }
+
+        .add-transaction-form #input-amount {
+            width: 70px;
+        }
+
+        .add-transaction-form input[type=text] {
+            @include shy-text();
+            @include input-text();
+
+            border-width: 0 0 1px 0;
+            margin: 15px 10px 15px 15px;
+        }
+
+        .add-transaction-form input[type=text]::-webkit-input-placeholder{
+            @include shy-text;
+        }
+
+        .add-transaction-form input[type=submit] {
+            @include button-submit;
+
+            margin: 15px 15px 15px 0;
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
