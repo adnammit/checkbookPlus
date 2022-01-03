@@ -7,6 +7,7 @@ CheckbookPlus is an improvement over the original Checkbook in that it introduce
 
 ## TO START:
 `npm run dev` to hotload while developing
+
 `npm run build` to transpile deployment to /dist dir
 
 
@@ -15,5 +16,4 @@ CheckbookPlus is an improvement over the original Checkbook in that it introduce
 * add form validation
 * replace "Add" button with "+" and "-" to easily create debits/credits
 * Add a persistent back end
-* Clean up webpack config and deploy on a hosted web server
-* Add images (like 'X' for transaction removal)
+* Add icons ('X' for transaction removal)

@@ -1,16 +1,4 @@
-$alabaster: #fafafa;
-$mercury: #e8e8e8;
-$silver: #ccc;
-$dusty-gray: #999;
-$gray: #888;
-$dove-gray: #666;
-$tundora: #444;
-$mineshaft: #333;
-$cod-mine: #222;
-$cod-gray: #111;
-
-$san-marino: #4b71b5;
-$tall-poppy: #B32D29;
+@import 'colors';
 
 @mixin dark-on-light {
     color: $mineshaft;
@@ -26,6 +14,11 @@ $tall-poppy: #B32D29;
     color: $dusty-gray;
     letter-spacing: 2px;
     text-transform: uppercase;
+}
+
+@mixin currency-text {
+    font-family: courier;
+    font-weight: bold;
 }
 
 @mixin input-text {
@@ -92,7 +85,6 @@ html, body {
         min-width: 500px;
         max-width: 60rem;
         margin: 2% auto auto auto;
-        box-shadow: 0 4px 0px $tundora;
         border-radius: 5px;
 
         .header {
@@ -125,14 +117,14 @@ html, body {
 
         .balance td:first-child {
             font-weight: normal;
-            color: #666;
+            color: $dove-gray;
         }
 
         .balance td:last-child {
+            @include currency-text();
+
             padding: 0px 20px;
             font-size: 1.2em;
-            font-family: courier;
-            font-weight: bold;
         }
 
         .item {
@@ -162,11 +154,9 @@ html, body {
             width: 10em;
             padding: 0;
 
-
             .amount {
+                @include currency-text();
                 padding: 10px;
-                font-family: courier;
-                font-weight: bold;
             }
 
             a .remove {
