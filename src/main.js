@@ -60,12 +60,17 @@ class AddTransactionForm extends React.Component {
 
 	onSubmit(e) {
 		e.preventDefault();
-		this.props.onAdd(this.state.name,this.state.amount);
-		this.setState({ displayName: "Description" });
-		this.setState({ name: "Description" });
-		this.setState({ displayAmount: "Amount" });
-		this.setState({ amount: "Amount" });
-		this.setState({ date: "" });
+		if (!this.state.name || !this.state.amount) {
+			alert('Both Description and Amount are required')
+		}
+		else {
+			this.props.onAdd(this.state.name, this.state.amount);
+			this.setState({ displayName: "Description" });
+			this.setState({ name: "" });
+			this.setState({ displayAmount: "Amount" });
+			this.setState({ amount: "" });
+			this.setState({ date: "" });
+		}
 	}
 
 	onNameChange(e) {
@@ -83,7 +88,7 @@ class AddTransactionForm extends React.Component {
 		if(e.target.value=="")
 		{
 			this.setState({ displayName: "Description" });
-			this.setState({ name: "Description"});
+			this.setState({ name: ""});
 		}
 		else
 		{
